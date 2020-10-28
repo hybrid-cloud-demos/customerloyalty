@@ -2,6 +2,8 @@ package io.quarkuscoffeeshop.customerloyalty.infrastructure;
 
 import io.quarkus.test.junit.QuarkusTest;
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.json.Json;
 import javax.json.JsonObject;
@@ -16,6 +18,8 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 @QuarkusTest
 public class ApiResourceTest {
+
+    Logger logger = LoggerFactory.getLogger(ApiResource.class);
 
     @Test
     public void testHelloEndpoint() {
@@ -38,9 +42,10 @@ public class ApiResourceTest {
 
             JsonObject jsonObject = payloadBuilder.build();
 
-                Json.createWriter(payloadWriter).write(jsonObject);
-                String payload = payloadWriter.toString();
-                given()
+            Json.createWriter(payloadWriter).write(jsonObject);
+            String payload = payloadWriter.toString();
+            logger.info(payload);
+            given()
                         .contentType("application/json")
                         .accept("application/json")
                         .body(payload)
