@@ -1,9 +1,8 @@
 package io.quarkuscoffeeshop.customerloyalty.infrastructure;
 
-import io.quarkuscoffeeshop.customerloyalty.domain.Adjective;
-import io.quarkuscoffeeshop.customerloyalty.domain.Animal;
-import io.quarkuscoffeeshop.customerloyalty.domain.RewardsMember;
-import io.quarkuscoffeeshop.customerloyalty.domain.MembershipApplication;
+import io.quarkuscoffeeshop.customerloyalty.domain.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -15,29 +14,56 @@ import java.net.URI;
 @Consumes(MediaType.APPLICATION_JSON)
 public class ApiResource {
 
+    Logger logger = LoggerFactory.getLogger(ApiResource.class);
+
     @POST
     @Path("/register")
     public Response registerUser(MembershipApplication membershipApplication) {
-
+        logger.info("received MembershipApplication: {}", membershipApplication);
         RewardsMember rewardsMember = RewardsMember.processApplication(membershipApplication);
         return Response.created(URI.create("/" + rewardsMember.getCodeName())).entity(rewardsMember).build();
     }
 
     @GET
+    @Path("/members")
+    public Response getAllMembers() {
+        logger.debug("retrieving all members");
+        return Response.ok().entity(LoyaltyMember.listAll()).build();
+    }
+
+    @GET
+    @Path("/members/{id}")
+    public Response getMembers(@PathParam("id") Long id) {
+        logger.debug("looking up member with id {}", id);
+        return Response.ok().entity(LoyaltyMember.findById(id)).build();
+    }
+
+    @GET
     @Path("/animals")
     public Response getAllAnimals() {
+        logger.debug("retrieving all animals");
         return Response.ok().entity(Animal.listAll()).build();
     }
 
     @GET
-    @Path("/animal/{id}")
+    @Path("/animals/{id}")
     public Response getAnimal(@PathParam("id") Long id) {
+        logger.debug("looking up animal with id {}", id);
         return Response.ok().entity(Animal.findById(id)).build();
     }
 
     @GET
     @Path("/adjectives")
     public Response allAdjectives() {
-        return Response.ok().entity(Adjective.findAll().stream().toArray()).build();
+        logger.debug("retrieving all adjectives");
+        return Response.ok().entity(Adjective.listAll()).build();
     }
+
+    @GET
+    @Path("/adjectives/{id}")
+    public Response allAdjectives(@PathParam("id") Long id) {
+        logger.debug("looking up adjective with id {}", id);
+        return Response.ok().entity(Adjective.findById(id)).build();
+    }
+
 }

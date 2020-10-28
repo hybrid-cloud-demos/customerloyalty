@@ -9,4 +9,10 @@ public class LoyaltyMember extends PanacheEntity {
 
     public String codeName;
 
+    public LoyaltyMember() {
+    }
+
+    public LoyaltyMember(String codeName) {
+        this.codeName = codeName;
+    }
 }

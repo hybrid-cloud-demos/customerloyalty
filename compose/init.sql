@@ -1412,3 +1412,6 @@ INSERT INTO customerloyalty.Animal(id, startswith, text) VALUES (nextval('hibern
 INSERT INTO customerloyalty.Animal(id, startswith, text) VALUES (nextval('hibernate_sequence'), 'Z', 'Zebu');
 INSERT INTO customerloyalty.Animal(id, startswith, text) VALUES (nextval('hibernate_sequence'), 'Z', 'Zorilla');
 INSERT INTO customerloyalty.Animal(id, startswith, text) VALUES (nextval('hibernate_sequence'), 'Z', 'Zorse');
+
+INSERT INTO customerloyalty.LoyaltyMember(id, codeName) VALUES (nextval('hibernate_sequence'), 'AmazingAntelope');
+
