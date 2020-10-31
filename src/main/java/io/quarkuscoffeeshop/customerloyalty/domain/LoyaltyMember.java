@@ -27,8 +27,10 @@ public class LoyaltyMember extends PanacheEntity {
 
     private static String generateCodeName() {
         String letter = RandomStringUtils.randomAlphabetic(1);
-        return new StringJoiner(Adjective.getRandomAdjectiveThatStartsWith(letter))
-                .add(Animal.getRandomAnimalThatStartsWith(letter)).toString();
+        String adjective = Adjective.getRandomAdjectiveThatStartsWith(letter);
+        String animal = Animal.getRandomAnimalThatStartsWith(letter);
+        return new StringJoiner(adjective)
+                .add(animal).toString();
     }
 
     @Override

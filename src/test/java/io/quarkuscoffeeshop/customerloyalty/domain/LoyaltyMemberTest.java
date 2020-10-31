@@ -1,10 +1,8 @@
 package io.quarkuscoffeeshop.customerloyalty.domain;
 
 import io.quarkus.panache.mock.PanacheMock;
-import io.quarkus.test.Mock;
 import io.quarkus.test.junit.QuarkusTest;
-import org.hamcrest.CoreMatchers;
-import org.junit.jupiter.api.BeforeAll;
+import io.quarkuscoffeeshop.customerloyalty.TestHelper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -15,12 +13,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 @QuarkusTest
-public class LoyaltyMemberTest {
-
-    Logger logger = LoggerFactory.getLogger(LoyaltyMemberTest.class);
-
-    static final String regex = "^([A-Z]){1}[a-z]*\\1[a-z]*$";
-
+public class LoyaltyMemberTest extends TestHelper {
 
     @BeforeEach
     public void setUpMocks() {
@@ -31,6 +24,8 @@ public class LoyaltyMemberTest {
         PanacheMock.mock(Animal.class);
         Mockito.when(Animal.getRandomAnimalThatStartsWith(Mockito.anyString())).thenReturn("Fieldmouse");
     }
+
+    Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Test
     public void testMemberRegistration(){
@@ -43,14 +38,16 @@ public class LoyaltyMemberTest {
         assertNotNull(loyaltyMember.getCodeName());
         assertNotNull(loyaltyMember.getEmail());
         assertEquals(email, loyaltyMember.getEmail());
-        assertTrue(loyaltyMember.getCodeName().matches(regex));
-
+        assertTrue(loyaltyMember.getCodeName().matches(TestHelper.CODENAME_REGEX));
     }
 
     @Test
     public void testRegex() {
 
-        assertTrue("FerretFerret".matches(regex));
-        assertFalse("Ferret".matches(regex));
+        assertTrue("FerretFerret".matches(TestHelper.CODENAME_REGEX));
+        assertFalse("Ferret".matches(TestHelper.CODENAME_REGEX));
     }
+
+
+
 }

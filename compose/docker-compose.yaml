@@ -26,4 +26,4 @@ services:
       - my-network
 networks:
   my-network:
-    name: todo-network
+    name: customerloyalty-dev-network

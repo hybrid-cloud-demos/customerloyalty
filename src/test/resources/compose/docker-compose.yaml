@@ -1,0 +1,17 @@
+version: '2.1'
+services:
+  customerloyalty-db:
+    image: postgres:11
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=customerloyaltyuser
+      - POSTGRES_PASSWORD=redhat-20
+      - POSTGRES_DB=customerloyaltydb
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - my-network
+networks:
+  my-network:
+    name: customerloyalty-test-network
