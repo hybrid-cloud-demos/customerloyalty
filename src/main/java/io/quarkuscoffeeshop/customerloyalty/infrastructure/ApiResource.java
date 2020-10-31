@@ -20,8 +20,8 @@ public class ApiResource {
     @Path("/register")
     public Response registerUser(MembershipApplication membershipApplication) {
         logger.info("received MembershipApplication: {}", membershipApplication);
-        RewardsMember rewardsMember = RewardsMember.processApplication(membershipApplication);
-        return Response.created(URI.create("/" + rewardsMember.getCodeName())).entity(rewardsMember).build();
+        LoyaltyMember loyaltyMember = LoyaltyMember.processMembershipApplication(membershipApplication);
+        return Response.created(URI.create("/" + loyaltyMember.getCodeName())).entity(loyaltyMember).build();
     }
 
     @GET
