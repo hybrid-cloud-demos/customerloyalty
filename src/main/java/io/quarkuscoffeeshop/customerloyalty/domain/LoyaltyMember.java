@@ -4,6 +4,7 @@ import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import org.apache.commons.lang3.RandomStringUtils;
 
 import javax.persistence.Entity;
+import javax.transaction.Transactional;
 import java.util.StringJoiner;
 
 @Entity
@@ -21,16 +22,20 @@ public class LoyaltyMember extends PanacheEntity {
         this.email = email;
     }
 
+    @Transactional
     public static LoyaltyMember processMembershipApplication(MembershipApplication membershipApplication) {
-        return new LoyaltyMember(generateCodeName(), membershipApplication.email);
+        LoyaltyMember loyaltyMember = new LoyaltyMember(generateCodeName(), membershipApplication.email);
+//        loyaltyMember.persist();
+        return loyaltyMember;
     }
 
     private static String generateCodeName() {
         String letter = RandomStringUtils.randomAlphabetic(1);
         String adjective = Adjective.getRandomAdjectiveThatStartsWith(letter);
         String animal = Animal.getRandomAnimalThatStartsWith(letter);
-        return new StringJoiner(adjective)
-                .add(animal).toString();
+        return new StringBuilder()
+                .append(adjective)
+                .append(animal).toString();
     }
 
     @Override

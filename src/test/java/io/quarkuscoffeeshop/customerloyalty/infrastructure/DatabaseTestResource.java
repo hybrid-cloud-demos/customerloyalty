@@ -4,12 +4,11 @@ import com.github.dockerjava.api.model.ExposedPort;
 import com.github.dockerjava.api.model.PortBinding;
 import com.github.dockerjava.api.model.Ports;
 import io.quarkus.test.common.QuarkusTestResourceLifecycleManager;
-import org.testcontainers.containers.GenericContainer;
 import org.testcontainers.containers.PostgreSQLContainer;
 
 import java.util.Map;
 
-public class DockerComposeTestResource implements QuarkusTestResourceLifecycleManager {
+public class DatabaseTestResource implements QuarkusTestResourceLifecycleManager {
 
     static final PostgreSQLContainer CONTAINER = new PostgreSQLContainer<>("postgres:11")
             .withDatabaseName("customerloyaltydb")

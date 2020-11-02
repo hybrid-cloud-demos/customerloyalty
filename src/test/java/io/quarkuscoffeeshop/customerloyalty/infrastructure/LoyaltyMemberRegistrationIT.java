@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@QuarkusTest @QuarkusTestResource(DockerComposeTestResource.class)
+@QuarkusTest @QuarkusTestResource(DatabaseTestResource.class)
 public class LoyaltyMemberRegistrationIT {
 
     Logger logger = LoggerFactory.getLogger(LoyaltyMemberRegistrationIT.class);

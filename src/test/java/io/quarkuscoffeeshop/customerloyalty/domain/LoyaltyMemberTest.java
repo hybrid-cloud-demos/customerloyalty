@@ -23,6 +23,7 @@ public class LoyaltyMemberTest extends TestHelper {
 
         PanacheMock.mock(Animal.class);
         Mockito.when(Animal.getRandomAnimalThatStartsWith(Mockito.anyString())).thenReturn("Fieldmouse");
+
     }
 
     Logger logger = LoggerFactory.getLogger(this.getClass());

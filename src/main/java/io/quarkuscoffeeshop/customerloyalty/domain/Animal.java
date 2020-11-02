@@ -1,9 +1,13 @@
 package io.quarkuscoffeeshop.customerloyalty.domain;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Transient;
+import java.util.List;
 import java.util.Random;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -11,7 +15,10 @@ import java.util.stream.Collectors;
 @Entity
 public class Animal extends PanacheEntity {
 
-    public char startsWith;
+    @Transient
+    static final Logger logger = LoggerFactory.getLogger(Animal.class);
+
+    public String startsWith;
 
     @Column(name = "text")
     public String value;
@@ -19,16 +26,18 @@ public class Animal extends PanacheEntity {
     public Animal() {
     }
 
-    public Animal(char startsWith, String value) {
+    public Animal(String startsWith, String value) {
         this.startsWith = startsWith;
         this.value = value;
     }
 
-    public static String getRandomAnimalThatStartsWith(String letter) {
-        Set<String> allValues = Animal.stream("startsWith = :letter", letter)
-                .map(a -> {return ((Adjective) a).value;})
-                .collect(Collectors.toSet());
-        return allValues.stream().collect(Collectors.toList()).get(new Random().nextInt(allValues.size()));
+    public static String getRandomAnimalThatStartsWith(final String letter) {
+        logger.debug("retrieving animals starting with {}", letter);
+        List<Animal> allAnimals = Animal.find("from Animal where startsWith = ?1", letter.toUpperCase()).list();
+        if(logger.isDebugEnabled()){
+            logger.debug("returned {} adjectives", allAnimals.size());
+            allAnimals.forEach(animal -> { logger.debug("{}", animal.toString());});
+        }
+        return allAnimals.get(new Random().nextInt(allAnimals.size())).value;
     }
-
 }

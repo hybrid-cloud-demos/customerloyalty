@@ -33,16 +33,12 @@ public class Adjective extends PanacheEntity {
 
     public static String getRandomAdjectiveThatStartsWith(final String letter) {
         logger.debug("retrieving adjectives starting with {}", letter);
-        List<Adjective> allAdjectives = Adjective.listAll();
-        List<Adjective> allValues = Adjective.find("from Adjective where startsWith = ?1", letter.toUpperCase()).list();
+        List<Adjective> adjectives = Adjective.find("from Adjective where startsWith = ?1", letter.toUpperCase()).list();
         if(logger.isDebugEnabled()){
-            allAdjectives.forEach(adjective -> { logger.debug("{}", adjective);});
-
-            logger.debug("returned {} adjectives", allValues.size());
-            allValues.forEach(adjective -> { logger.debug("{}", adjective);});
-
+            logger.debug("returned {} adjectives", adjectives.size());
+            adjectives.forEach(adjective -> { logger.debug("{}", adjective.toString());});
         }
-        return allValues.get(new Random().nextInt(allValues.size())).value;
+        return adjectives.get(new Random().nextInt(adjectives.size())).value;
     }
 
 }
