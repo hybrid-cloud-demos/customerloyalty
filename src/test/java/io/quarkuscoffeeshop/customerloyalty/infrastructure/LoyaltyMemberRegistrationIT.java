@@ -12,21 +12,6 @@ import org.slf4j.LoggerFactory;
 import static org.junit.jupiter.api.Assertions.*;
 
 @QuarkusTest @QuarkusTestResource(DatabaseTestResource.class)
-public class LoyaltyMemberRegistrationIT {
+public class LoyaltyMemberRegistrationIT extends TestHelper{
 
-    Logger logger = LoggerFactory.getLogger(LoyaltyMemberRegistrationIT.class);
-
-    @Test
-    public void testMemberRegistration(){
-
-        String email = "elwood@bluesbrothers.com";
-        MembershipApplication membershipApplication = new MembershipApplication(email);
-        LoyaltyMember loyaltyMember = LoyaltyMember.processMembershipApplication(membershipApplication);
-        logger.info(loyaltyMember.toString());
-        assertNotNull(loyaltyMember);
-        assertNotNull(loyaltyMember.getCodeName());
-        assertNotNull(loyaltyMember.getEmail());
-        assertEquals(email, loyaltyMember.getEmail());
-        assertTrue(loyaltyMember.getCodeName().matches(TestHelper.CODENAME_REGEX));
-    }
 }

@@ -22,10 +22,8 @@ public class LoyaltyMember extends PanacheEntity {
         this.email = email;
     }
 
-    @Transactional
     public static LoyaltyMember processMembershipApplication(MembershipApplication membershipApplication) {
         LoyaltyMember loyaltyMember = new LoyaltyMember(generateCodeName(), membershipApplication.email);
-//        loyaltyMember.persist();
         return loyaltyMember;
     }
 
