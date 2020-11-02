@@ -2,18 +2,14 @@ package io.quarkuscoffeeshop.customerloyalty.domain;
 
 import io.quarkus.panache.mock.PanacheMock;
 import io.quarkus.test.junit.QuarkusTest;
-import io.quarkuscoffeeshop.customerloyalty.TestHelper;
+import io.quarkuscoffeeshop.customerloyalty.BaseRegistrationTest;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 @QuarkusTest
-public class LoyaltyMemberTest extends TestHelper {
+public class LoyaltyMemberTest extends BaseRegistrationTest {
 
     @BeforeEach
     public void setUpMocks() {

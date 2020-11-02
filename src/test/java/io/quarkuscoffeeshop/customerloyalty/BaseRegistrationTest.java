@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public abstract class TestHelper {
+public abstract class BaseRegistrationTest {
 
     Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -17,6 +17,7 @@ public abstract class TestHelper {
     @Test
     public void testMemberRegistration(){
 
+        logger.info("testing member registration");
         String email = "elwood@bluesbrothers.com";
         MembershipApplication membershipApplication = new MembershipApplication(email);
         LoyaltyMember loyaltyMember = LoyaltyMember.processMembershipApplication(membershipApplication);
@@ -25,14 +26,14 @@ public abstract class TestHelper {
         assertNotNull(loyaltyMember.getCodeName());
         assertNotNull(loyaltyMember.getEmail());
         assertEquals(email, loyaltyMember.getEmail());
-        assertTrue(loyaltyMember.getCodeName().matches(TestHelper.CODENAME_REGEX));
+        assertTrue(loyaltyMember.getCodeName().matches(BaseRegistrationTest.CODENAME_REGEX));
     }
 
     @Test
     public void testRegex() {
 
-        assertTrue("FerretFerret".matches(TestHelper.CODENAME_REGEX));
-        assertFalse("Ferret".matches(TestHelper.CODENAME_REGEX));
+        assertTrue("FerretFerret".matches(BaseRegistrationTest.CODENAME_REGEX));
+        assertFalse("Ferret".matches(BaseRegistrationTest.CODENAME_REGEX));
     }
 
 
