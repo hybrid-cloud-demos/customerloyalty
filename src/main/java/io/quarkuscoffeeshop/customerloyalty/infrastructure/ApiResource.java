@@ -24,7 +24,7 @@ public class ApiResource {
     @POST
     @Path("/register")
     @Transactional
-    public Response registerUser(MembershipApplication membershipApplication) {
+    public Response registerUser(final MembershipApplication membershipApplication) {
         logger.info("received MembershipApplication: {}", membershipApplication);
         LoyaltyMember loyaltyMember = LoyaltyMember.processMembershipApplication(membershipApplication);
         logger.debug("persisting LoyaltyMember {}", loyaltyMember);

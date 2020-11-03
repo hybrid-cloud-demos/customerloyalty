@@ -4,7 +4,6 @@ import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import org.apache.commons.lang3.RandomStringUtils;
 
 import javax.persistence.Entity;
-import javax.transaction.Transactional;
 import java.util.StringJoiner;
 
 @Entity
