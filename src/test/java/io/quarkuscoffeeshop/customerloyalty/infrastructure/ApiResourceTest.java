@@ -2,12 +2,10 @@ package io.quarkuscoffeeshop.customerloyalty.infrastructure;
 
 import io.quarkus.panache.mock.PanacheMock;
 import io.quarkus.test.junit.QuarkusTest;
-import io.quarkus.test.junit.mockito.InjectMock;
 import io.quarkuscoffeeshop.customerloyalty.TestUtil;
 import io.quarkuscoffeeshop.customerloyalty.domain.Adjective;
 import io.quarkuscoffeeshop.customerloyalty.domain.Animal;
 import io.quarkuscoffeeshop.customerloyalty.domain.LoyaltyMember;
-import io.quarkuscoffeeshop.customerloyalty.domain.LoyaltyMemberRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -31,9 +29,6 @@ public class ApiResourceTest {
 
     Logger logger = LoggerFactory.getLogger(ApiResource.class);
 
-    @InjectMock
-    LoyaltyMemberRepository loyaltyMemberRepository;
-
     @BeforeEach
     public void setUpMocks() {
 
@@ -42,8 +37,6 @@ public class ApiResourceTest {
 
         PanacheMock.mock(Animal.class);
         Mockito.when(Animal.getRandomAnimalThatStartsWith(Mockito.anyString())).thenReturn("Fieldmouse");
-
-        Mockito.doAnswer(new TestUtil.AssignIdToEntityAnswer(new Random().nextLong())).when(loyaltyMemberRepository).persist(any(LoyaltyMember.class));
     }
 
 

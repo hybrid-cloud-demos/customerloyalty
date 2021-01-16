@@ -9,7 +9,7 @@ import org.mockito.Mockito;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 @QuarkusTest
-public class LoyaltyMemberTest extends BaseRegistrationTest {
+public class LoyaltyMemberTest {
 
     @BeforeEach
     public void setUpMocks() {

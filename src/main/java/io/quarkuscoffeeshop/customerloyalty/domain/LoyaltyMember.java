@@ -24,6 +24,7 @@ public class LoyaltyMember extends PanacheEntity {
     }
 
     public static LoyaltyMember processMembershipApplication(final MembershipApplication membershipApplication) {
+
         LoyaltyMember loyaltyMember = createLoyaltyMember(membershipApplication.email);
 
         boolean validApplication = false;
@@ -38,16 +39,16 @@ public class LoyaltyMember extends PanacheEntity {
         return loyaltyMember;
     }
 
-    private static boolean validateApplication(final String codeName, final String email){
+    protected static boolean validateApplication(final String codeName, final String email){
         LoyaltyMember loyaltyMember = find("#LoyaltyMember.loyaltyMemberExists", codeName, email).firstResult();
         return loyaltyMember == null ? true : false;
     }
 
-    private static LoyaltyMember createLoyaltyMember(final String email) {
+    protected static LoyaltyMember createLoyaltyMember(final String email) {
         return new LoyaltyMember(generateCodeName(), email);
     }
 
-    private static String generateCodeName() {
+    protected static String generateCodeName() {
         String letter = RandomStringUtils.randomAlphabetic(1);
         String adjective = Adjective.getRandomAdjectiveThatStartsWith(letter);
         String animal = Animal.getRandomAnimalThatStartsWith(letter);
